@@ -1,0 +1,120 @@
+Pratap Luitel
+CS 50, Project 4
+
+Testing procedures. 
+
+For hashtable.c and list.c, I wrote a main function that tested 
+each of the methods within the file. Such methods have been commented out, 
+but can easily be uncommented when needed. A snippet of the test for list.c is 
+as follows:
+
+=======appended a page=======
+list->tail->page->url: www.URL1.com
+list->tail->prev: (nil)
+list->tail->next: (nil)
+=======appended a page=======
+List->tail->page->url: www.URL2.com
+List->tail->prev: 0x2272030
+List->tail->next: (nil)
+=======popped a page=======
+Popped url: www.URL1.com
+List->tail->prev: (nil)
+=======popped a page=======
+Popped URL: www.URL2.com
+List->head: (nil)
+
+
+To test crawler, I tried various inputs for arguments. 
+
+url: tried non default urls which will prompt a message
+location: tried both non existing directory and an existing location, 
+    but not a directory. Gives error on both. 
+
+depth: tried -ve values and values greater than 4. Gives error message
+    and instructs user accordingly. 
+
+
+
+Additionally, I have implemented all the tests in crawlerTest.sh. 
+The results of the script are stored in crawlerTest.log. 
+
+The script runs the following tests:
+1)test for invalid URL
+2)test for invalid directory
+3)test for invalid depth
+4)test for valid arguments: seed url data 1
+
+Here is a result of one of such logs:
+
+
+
+Author: Pratap Luitel
+Log created on: Sat May 9 18:21:04 EDT 2015
+
+This file is a log of various tests, implemented in crawlerTest.sh
+*****Cleaning*****
+rm -f temp 
+rm -f *~ 
+rm -f *.*~
+rm -f crawler
+rm -f *.o
+rm -f *.swp
+rm -f *#
+rm -f .*swp
+rm -f core.*
+rm -f data/*
+
+*****Building*****
+gcc -Wall -pedantic -std=c11 -g -ggdb -o crawler list.c web.c hashtable.c crawler.c -lcurl
+
+
+*****Checking number of arguments****
+Input: ./crawler http://www.dartmouth.edu directory
+Output is listed below, 
+Invalid Input Argument
+==============================================================
+Usage: The arguments should be [seedURL] [directory] [depth]
+webpage: only the seed page for CS50: http://old-www.cs.dartmouth.edu/~cs50/tse
+directory: must already exist
+depth: in the range [0-4]
+
+*****Checking for directory*****
+Input: ./crawler http://old-www.cs.dartmouth.edu/~cs50/tse folderDoesnotExist 2
+Output is listed below, 
+Directory does not exist
+==============================================================
+Usage: The arguments should be [seedURL] [directory] [depth]
+webpage: only the seed page for CS50: http://old-www.cs.dartmouth.edu/~cs50/tse
+directory: must already exist
+depth: in the range [0-4]
+
+*****Checking for depth validity*****
+Input: ./crawler http://old-www.cs.dartmout.edu/~cs50/tse data -2
+Output is listed below, 
+Invalid [depth]
+==============================================================
+Usage: The arguments should be [seedURL] [directory] [depth]
+webpage: only the seed page for CS50: http://old-www.cs.dartmouth.edu/~cs50/tse
+directory: must already exist
+depth: in the range [0-4]
+
+*****Run crawler for valid arguments- seedUrl data 1*****
+Found link: http://old-www.cs.dartmouth.edu/~cs50/tse/
+Found link: http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Computer_science.html
+Found link: http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/C_(programming_language).html
+Found link: http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Unix.html
+Found link: http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Dartmouth_College.html
+Found link: http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Hash_table.html
+Found link: http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Linked_list.html
+
+*****Cleaning*****
+rm -f temp 
+rm -f *~ 
+rm -f *.*~
+rm -f crawler
+rm -f *.o
+rm -f *.swp
+rm -f *#
+rm -f .*swp
+rm -f core.*
+rm -f data/*

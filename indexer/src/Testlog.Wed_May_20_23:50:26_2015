@@ -1,0 +1,74 @@
+Filname: Wed_May_20_23:50:26_2015
+
+*****Building*****
+Status: Build Successful
+
+*****Argument Testing*****
+Input: ./indexer ?
+Output,
+No. of arguments  = 2.
+====================================
+Incorrect Usage - Please enter the argument in one of the following formats.
+Indexing Usage: ./indexer  [TARGET_DIRECTORY] [RESULTS FILE NAME]
+Indexing & Testing Usage:  ./indexer  [TARGET_DIRECTORY] [RESULTS FILENAME] [RESULTS FILENAME] [REWRITEN FILENAME]
+Status: Test Successful
+
+Input: ./indexer data a b c d e
+Output,
+No. of arguments  = 7.
+====================================
+Incorrect Usage - Please enter the argument in one of the following formats.
+Indexing Usage: ./indexer  [TARGET_DIRECTORY] [RESULTS FILE NAME]
+Indexing & Testing Usage:  ./indexer  [TARGET_DIRECTORY] [RESULTS FILENAME] [RESULTS FILENAME] [REWRITEN FILENAME]
+Status: Test Successful
+
+*****Directory*****
+Input: ./indexer directoryDNE index.dat 
+Output,
+Incorrect directory path. 
+====================================
+Incorrect Usage - Please enter the argument in one of the following formats.
+Indexing Usage: ./indexer  [TARGET_DIRECTORY] [RESULTS FILE NAME]
+Indexing & Testing Usage:  ./indexer  [TARGET_DIRECTORY] [RESULTS FILENAME] [RESULTS FILENAME] [REWRITEN FILENAME]
+Status: Test successful
+
+*****Filename*****
+./indexer /net/class/cs50/public_html/tse/wiki index.dat
+Output,
+Can't open the file
+Status: Test Successful
+
+
+*****Argument Test*****
+
++ Filnames do not match
+Input: 
+./indexer data index.dat indeeex.dat final.dat
+Output,
+Test Mode: Arg 3 and Arg 4 must be sameStatus: Test Successful
+
+*****Regular Mode*****
+
++ Depth 0
+Input: ./index data0 index.dat
+Output,
+Status: Test Successful
+
+
++ Depth 1
+Input: ./indexer data1 index.dat
+Status: Test Successful
+
+
++Depth 2
+Incorrect directory path. 
+====================================
+Incorrect Usage - Please enter the argument in one of the following formats.
+Indexing Usage: ./indexer  [TARGET_DIRECTORY] [RESULTS FILE NAME]
+Indexing & Testing Usage:  ./indexer  [TARGET_DIRECTORY] [RESULTS FILENAME] [RESULTS FILENAME] [REWRITEN FILENAME]
+
+Completing Testing...
+
+Testing Complete Successfully.
+Time: Wed_May_20_23:50:34_2015
+

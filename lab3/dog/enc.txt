@@ -1,0 +1,284 @@
+-------Encryption Happeninng-------
+finished encrypting arrays...
+In printfile. Encryptstate is: 1 
+1 /*
+2  * Psbubq Lvjufm
+3  * 4/20/15
+4  *
+5  * eph bmmpxt wbsjpvt gmbht boe tuvgg
+6  *
+7  *
+8  */
+9 
+10 #jodmvef<tuejp.i>
+11 #jodmvef<tuemjc.i>
+12 #jodmvef<tusjoh.i>
+13 #jodmvef<vojtue.i>
+14 #jodmvef<duzqf.i>
+15 
+16 #efgjof LIMIT 1000
+17 
+18 /*Vbsjbcmft gps hfupqu*/
+19 fyufso dibs *pqubsh;//tupsft joqvu gjmf obnf
+20 fyufso jou pqujoe;//
+21 fyufso jou pqupqu;
+22 
+23 /*Gmpcbm Vbsjbcmft*/
+24 jou d;
+25 jou oFmbh = 0;
+26 jou fodszquSubuf = 0;
+27 jou fss = 0;
+28 dibs *fodszquIogp=NULL;
+29 jou fodszquAssbz[26][2];
+30 jou mjofNvn = 1;
+31 
+32 /*Svc Fvodujpot*/
+33 jou hfupqu(jou bshd, dibs *dpotu bshw[], dpotu dibs *pqutusjoh);
+34 wpje qsjouHfmq();
+35 wpje qsjouVfstjpo();
+36 wpje qsjouFjmf(dibs *gjmfNbnf,jou qsjouTpSueOvu,jou oFmbh,
+37                         jou fodszquSubuf,dibs *fodszquFjmf);
+38 wpje fodszqu(dpotu dibs *fodszquFjmf, jou fodszquSubuf);
+39 
+40 //nbjo
+41 jou nbjo(jou bshd, dibs *bshw[])
+42 {
+43         xijmf ((d=hfupqu(bshd,bshw,"ouM:n:")) != -1)
+44         txjudi(d){
+45             dbtf 'o':
+46                 oFmbh += 1;
+47                 csfbl;
+48             dbtf 'n':
+49                 jg (fodszquSubuf == -1)
+50                     fodszquSubuf = 0;
+51                 fmtf
+52                     fodszquSubuf = 1;
+53                 fodszquIogp = pqubsh;
+54                 csfbl;
+55             dbtf 'M':
+56                 jg (fodszquSubuf == 1)
+57                     fodszquSubuf = 0;
+58                 fmtf
+59                     fodszquSubuf = -1;
+60                 fodszquIogp = pqubsh;
+61                 csfbl;
+62             dbtf '?':
+63                 fss = 1;
+64                 csfbl;
+65             efgbvmu:
+66                 csfbl;
+67         }
+68 
+69     //difdl jg joqvu jt --ifmq 
+70         jg (bshd == 2){
+71             jou xpseLfohui = tusmfo(bshw[1]);
+72             dibs joqvuWpse[xpseLfohui + 1];
+73             joqvuWpse[0]='\0';
+74             tusdbu(joqvuWpse,bshw[1]); //joqvuWpse opx foet xjui '\0'
+75                 jg (tusdnq(joqvuWpse,"--ifmq") == 0){
+76                     qsjouVfstjpo();
+77                     gqsjoug(tuepvu,"----------------------\o");
+78                     qsjouHfmq();
+79                     fyju(0);
+80                 }        
+81         }    
+82 
+83         jg(fss){
+84             gqsjoug(tuefss,"Essps, jowbmje joqvu.\o");
+85             qsjouHfmq();
+86             fyju(1);
+87         }
+88         /*jg uifsf jt op joqvu gjmf*/
+89         fmtf jg(pqujoe + 1 > bshd){
+90 
+91             dibs *gjmfNbnf = NULL; /*op gjmf up joqvu gspn*/
+92             jou qsjouFspnFjmf = 0; /*ublf joqvu gspn tuejo*/
+93             qsjouFjmf(gjmfNbnf,qsjouFspnFjmf,oFmbh,fodszquSubuf,fodszquIogp);
+94 
+95         }
+96         fmtf{ /*jg uifsf jt bu mfbtu bo joqvu gjmf*/
+97             gps (jou j = pqujoe; j < bshd; j++){ 
+98                 
+99                 jou qsjouFspnFjmf = 1; /*joqvu ufyu gspn gjmfNbnf*/
+100 
+101                 /*dpowfsu joqvu gjmf obnft up C tuzmf tusjoht*/
+102                 jou xpseLfohui = tusmfo(bshw[j]);
+103                 dibs gjmfNbnf[xpseLfohui + 1];
+104                 gjmfNbnf[0]='\0';
+105                 tusdbu(gjmfNbnf,bshw[j]);
+106                  
+107                 jg(tusdnq(gjmfNbnf,"-") == 0){
+108                      qsjouFjmf(NULL,0,oFmbh,fodszquSubuf,fodszquIogp);/*qsjou up tuepvu*/
+109                      fyju(0);
+110                 }
+111 
+112                 qsjouFjmf(gjmfNbnf, qsjouFspnFjmf, oFmbh,fodszquSubuf, fodszquIogp);
+113             }
+114             qsjoug("epof\o");
+115         }
+116             
+117             
+118 sfuvso 0;
+119 }
+120 
+121 wpje qsjouHfmq()
+122 {
+123     qsjoug("Cpnnboe: eph\o");
+124     qsjoug("Utbhf: eph [-o] [-n gjmfobnf] [-M gjmfobnf] [gjmfobnf]\o");
+125     qsjoug("txjudi: --wfstjpo gps wfstjpo jogp\o");
+126     qsjoug("txjudi: --ifmq gps uijt pqujpo\o");
+127 }
+128 
+129 wpje qsjouVfstjpo()
+130 {
+131     qsjoug("Vfstjpo: 0.1\o");
+132     qsjoug("Avuips: Psbubq Lvjufm\o");
+133     qsjoug("CS50, Dbsunpvui Cpmmfhf\o");
+134 }
+135 
+136 /**
+137  * Tijt gvodujpo qsjout pvuqvu up tuepvu. 
+138  * Tif joqvu ufyu jt fjuifs gspn tuejo ps gspn hjwfo gjmf/t. 
+139  * Ouifs bshvnfout sfgmfdu wbsjpvt txjudift pg uif eph dpnnboe. 
+140  * 
+141  *gjmfNbnf: qus pg joqvu gjmf, ovmm jg tuejo
+142  *qsjouFspnFjmf: jou, 1 jg qsjoujoh gspn b hjwfo gjmf, fmtf 0
+143  *oFmbh: jou, 1 jg ovncfsmjof jt up cf qsjoufe, fmtf 0
+144  *fodszquSubuf: jou, -1 gps efdszqu, 1 gps fodszqu, 0 gps ofjuifs ps cpui
+145  *fodszquIogp: *dibs up uif gjmf dpoubjojoh fodszqu/efdszqu jogp
+146  * */
+147 wpje qsjouFjmf(dibs *gjmfNbnf, jou qsjouFspnFjmf,jou oFmbh, 
+148         jou fodszquSubuf,dibs * fodszquIogp){
+149     
+150     
+151     FILE *gq = gpqfo(gjmfNbnf,"s");
+152     jg (gq == NULL){
+153         jg (!qsjouFspnFjmf)
+154             gq = tuejo;
+155         fmtf{
+156             gqsjoug(tuepvu,"Ioqvu Fjmf epft opu fyjtu.\o");
+157             fyju(1);
+158         }
+159     }
+160     
+161     //jg fodszqu/efdszqu gmbh jt po 
+162     jg (fodszquSubuf == 1 || fodszquSubuf == -1){
+163         fodszqu(fodszquIogp,fodszquSubuf);
+164         qsjoug("Io qsjougjmf. Eodszqutubuf jt: %e \o",fodszquSubuf);
+165         //difdl jg fod ps efd jogp jt wbmje
+166         
+167     }
+168     
+169     jou di;/* tupsft jou gspn ghfud*/
+170     jou pggtfu = 0; /*uif ejggfsfodf jo btdjj wbmvf*/
+171     jou ofxLjof = 1; /*gmbh gps ofx mjof*/
+172     
+173     xijmf((di = ghfud(gq)) != EOF){
+174         /*jg fodszqu ps efdszqu gmbh jt po*/
+175         jg(fodszquSubuf == 1 || fodszquSubuf == -1){ 
+176             /*jg btdjj pg dibsbdufs jt jo b-a*/
+177             jg (di > 96 && di < 123){
+178                 /*+wf pggtfu gps fodszqu, -wf gps efdszqu, 0 fmtf*/
+179                 pggtfu  =  fodszquSubuf * fodszquAssbz[di-97][1];
+180             }
+181             fmtf
+182                 pggtfu = 0;
+183         }
+184 
+185         //jg ovncfs gmbh jt po boe jut b ofx mjof
+186         jg (oFmbh && ofxLjof){
+187             gqsjoug(tuepvu,"%e %d",mjofNvn,di + pggtfu);
+188             mjofNvn++; 
+189         }
+190         fmtf{
+191             gqsjoug(tuepvu,"%d",di + pggtfu);
+192         }
+193         //vqebuf ofxmjof
+194         jg (di == 10)
+195             ofxLjof = 1;
+196         fmtf
+197             ofxLjof = 0; 
+198     }
+199     gdmptf(gq);
+200 
+201 }
+202 
+203 wpje fodszqu(dpotu dibs *fodszquFjmf, jou fodszquSubuf){
+204     qsjoug("-------Eodszqujpo Hbqqfojooh-------\o");
+205 
+206     FILE *fq = gpqfo(fodszquFjmf,"s");
+207     //difdl jg uif gjmf fyjtut
+208     jg(fq == NULL){
+209         gqsjoug(tuepvu,"Eodszqujpo gjmf epft opu fyjtu\o");
+210         fyju(1);
+211     }
+212                   
+213     //tupsf fodszqujpot jo bo bssbz
+214     dibs tjohmfLjof[1000];
+215     FILE *ufnqEodszquFjmf = gpqfo("fodszqujpoBvggfs.uyu","x+");
+216     //FILE *ufnqDfdszquFjmf = gpqfo("efdszqujpoBvggfs.uyu"."x+");
+217     jou joefy = 0;
+218     xijmf (ghfut(tjohmfLjof,1000,fq)){
+219         
+220         //TO DOt: difdl jg uif fodszqujpo/efdszqujpo gjmf jt wbmje
+221         //1.difdl jg uif psjhjo dibst bsf xjuijo btdjj 97-123
+222         //2.difdl jg uif fodszqufe dibst bsf xjuijo btdjj 97-23
+223         //3.difdl jg uifsf bsf 26 ejggfsfou dibst
+224         //4.difdl jg fbdi mjof jo fodIogp gjmf ibt 3 dibst: psjhjo dibs ,tqbdf,eftu dibs
+225         
+226         /*fodszqujpo*/    
+227         jou tpvsdfCibs = (jou)tjohmfLjof[0];
+228         jg (fodszquSubuf == -1)/*efdszqujpo*/
+229             tpvsdfCibs = (jou)tjohmfLjof[2];
+230         jou eftuCibs = (jou)tjohmfLjof[2] - (jou)tjohmfLjof[0];
+231         
+232         /*vqebuf uif fodszqujpo/efdszqujpo bssbz*/
+233         fodszquAssbz[tpvsdfCibs-97][0] = tpvsdfCibs;
+234         fodszquAssbz[tpvsdfCibs-97][1] = eftuCibs;
+235         
+236         gqsjoug(ufnqEodszquFjmf,"%e %e\o",fodszquAssbz[joefy-1][0],fodszquAssbz[joefy-1][1]);
+237         joefy++;   
+238     }
+239    
+240     qsjoug("gjojtife fodszqujoh bssbzt...\o");
+241     gdmptf(fq),gdmptf(ufnqEodszquFjmf);
+242 }
+243 
+244 
+245 /*
+246 wpje qsjouIoqvu(jou oFmbh,jou fodszquFmbh,dpotu dibs *fodszquFjmf,
+247         jou efdszquFmbh,dpotu dibs *efdszquFjmf)
+248 {
+249     jou mjofNvn = 1;
+250     jou di;
+251     jou pggtfu = 0;
+252     jou ofxLjof = 1; 
+253     //jg fodszqu gmbh jt po 
+254     jg (fodszquFmbh)
+255         fodszqu(fodszquFjmf);
+256      
+257     xijmf((di = ghfud(tuejo)) != EOF){
+258         //jg fodszqujpo gmbh jt po boe uif dibsbdufs cfjoh sfbe 
+259         //jt cfuxffo b up a(btdjj 97 boe 122),gjoe uif pggtfu tupsfe jo fodszquAssbz
+260         jg(fodszquFmbh && di < 96 && di > 123)
+261             pggtfu  =  fodszquAssbz[di-97][1];//gjstu joefy pg pggtfu tubsut gspn 97 gps b
+262         fmtf
+263             pggtfu = 0;
+264 
+265         //jg ovncfs gmbh jt po boe jut b ofx mjof
+266         jg (oFmbh && ofxLjof){
+267             gqsjoug(tuepvu,"%e %d",mjofNvn,di + pggtfu);
+268             mjofNvn++; 
+269         }
+270         fmtf{
+271             gqsjoug(tuepvu,"%d",di + pggtfu);
+272         }
+273         //vqebuf ofxmjof
+274         jg (di == 10)
+275             ofxLjof = 1;
+276         fmtf
+277             ofxLjof = 0; 
+278     }
+279 }
+280 */
+done

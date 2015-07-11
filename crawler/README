@@ -1,0 +1,17 @@
+
+	Pratap Luitel
+
+    I've implemented most of the functions as suggested in the assignment/lab. 
+    Amongst them are list.c and hashtable.c. I have implemented methods like 
+    hashTableLookup, AddToHashTable, AppendToList, etc as suggested in these files. 
+
+    I have also deviated slightly from the suggested implementation method for the project.
+    I have not passed the address to initializeList (&URLList) as suggested - primarily because
+    I had already implemented the function prior to the suggestion being made by the professor. 
+
+    I have assumed that the only acceptable input url is the default url suggested,
+    http://old-www.cs.dartmouth.edu/~cs50/tse.Depth can be in the range [0-4].All the
+    corresponding html files will be saved in incremental numbers starting at 1. 
+
+    The data folder in src is to store the data files after retrieving the html pages. 
+

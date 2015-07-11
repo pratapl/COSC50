@@ -1,0 +1,22 @@
+Pratap Luitel
+CS 50
+Test.txt 
+This file explains approaches I took for testing. 
+************************************************
+
+First of all, I tried different combination of switches. 
+./dog
+./dog -
+./dog -n
+./dog -n -m encryptFile.txt
+./dog -n -M decryptFile.txt
+./dog -n -m encryptFile.txt -M decryptFile.txt
+./dog -n -m encryptFile.txt > someFile.txt
+
+Such combinations stated above all worked fine with 
+encryptFile.txt which abides by the needed conditions for encryption. 
+
+When tried with a invalid encryption file encryptSame.txt (violates one-to-one
+mapping) error is thrown back at the user. Similarly, when encrypted with
+encryptMoreLines.txt which contains more than 26 lines, error message is displayed. 
+

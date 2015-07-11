@@ -1,3 +1,4 @@
 # COSC50
-Softawre Design and Implementation course taken at Dartmouth College during Spring, 2015. 
+Software Design and Implementation taken at Dartmouth College during winter term, 2015. 
+
 

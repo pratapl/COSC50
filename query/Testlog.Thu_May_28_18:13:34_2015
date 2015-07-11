@@ -1,0 +1,60 @@
+Filname: Thu_May_28_18:13:34_2015
+
+*****Building*****
+Make Clean
+Compile indexer
+Building the index
+done!
+Compile Query
+Status: Query Build Successful
+
+*****Argument Testing*****
+Input: ./query 
+Output,
+Error: Incorrect usage
+Query Usage: ./query [indexed data(eg. indexer.dat)] [html data(eg. data)]
+Status: Argument Test Successful
+
+Input: ./query a b c d 
+Output,
+Error: Incorrect usage
+Query Usage: ./query [indexed data(eg. indexer.dat)] [html data(eg. data)]
+Status: Argument Test Successful
+
+*****Directory*****
+Input: ./query data/indexer.dat directoryDNE 
+Output,
+Incorrect path for html directory
+Status: Invalid directory Test successful
+
+*****Filename*****
+Input: ./query data/fileDNE.dat data/htmlData
+Output,
+Incorrect path for indexed file
+Status: Invalid File Test Successful
+
+
+*****Normal Mode*****
+Input: ./query data/indexer.dat data/htmlData
+Output,
+Satrting query..
+Query:>Query:>Document ID:147, Frequency:2, URL:http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Electrical_engineering.html
+
+Document ID:19, Frequency:1, URL:http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Digital_computer.html
+
+Document ID:21, Frequency:1, URL:http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Blaise_Pascal.html
+
+Document ID:31, Frequency:1, URL:http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Computer.html
+
+Document ID:95, Frequency:1, URL:http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Computer_system.html
+
+Document ID:97, Frequency:1, URL:http://old-www.cs.dartmouth.edu/~cs50/tse/wiki/Philosophy.html
+
+Valid query call successful testing
+
+
+*****Completing Testing*****
+
+Testing Complete Successfully.
+Time: Thu_May_28_18:13:55_2015
+

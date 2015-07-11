@@ -1,0 +1,77 @@
+README
+
+Author: Pratap Luitel
+CS50, Query 
+
+Makefile should be used to build and run the query. 
+
+Compliation:
+    make clean: cleans the folder
+    make compileIndexer: recompiles the indexer, builds a new indexer.dat
+                         indexer.dat is stored in query/data/indexer.dat. 
+
+    make: compiles the query
+
+Running:
+    usage: ./query [path to indexer.dat] [html file folder]
+    example: ./query data/indexer.dat data/htmlData
+    
+Assumptions:
+    Crawler component is not included in the query. Therefore, while building the indexer.dat
+    all the required html files are in data/htmlData. 
+    
+    [html file folder] in the usage is only checked to see if it is a valid directory. 
+    The files inside the directory arent checked. So, as long as a valid directory
+    is input, the query will proceed, although it wont fetch a result. 
+
+Testing:
+    QBATS.sh covers the following cases. 
+        ***Build***
+        Clean Folder
+        Compile Indexer
+        Compile Query
+        
+        ***Test***
+        Less argument to Query
+        More argument to Query
+        Invalid file to Query
+        Invalid htmlFolder to Query
+
+        ***Run***
+        valid arguments
+    
+    The results are saved in a log file named after after the timestamp. 
+
+Implementation details:
+    Implmentation details can be found in Documentationi_Query.pdf
+
+
+Data Organization:
+        
+.
+├── data (contains the indexer.data and htmlData)
+├── Documentation_Query.pdf 
+├── Makefile
+├── QBATS.sh
+├── query
+├── README
+├── src
+│   ├── hashtable.c
+│   ├── hashtable.h
+│   ├── indexer.c
+│   ├── query.c
+│   ├── queryHelper.c
+│   └── queryHelper.h
+└── util
+    ├── common.h
+    ├── file.c
+    ├── file.h
+    ├── file.o
+    ├── indexer.h
+    ├── libtseutil.a
+    ├── Makefile
+    ├── web.c
+    ├── web.h
+    └── web.o
+
+3 directories, 21 files

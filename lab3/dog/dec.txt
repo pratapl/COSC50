@@ -1,0 +1,288 @@
+-------Encryption Happeninng-------
+finished encrypting arrays...
+In printfile. Encryptstate is: -1 
+1 -------Embqxoshnm Hzoodmhmmf-------
+2 ehmhrgdc dmbqxoshmf zqqzxr...
+3 Im oqhmsehkd. Embqxosrszsd hr: 1 
+4 1 /*
+5 2  * Pratap Luitel
+6 3  * 4/20/15
+7 4  *
+8 5  * dog allows various flags and stuff
+9 6  *
+10 7  *
+11 8  */
+12 9 
+13 10 #include<stdio.h>
+14 11 #include<stdlib.h>
+15 12 #include<string.h>
+16 13 #include<unistd.h>
+17 14 #include<ctype.h>
+18 15 
+19 16 #define LIMIT 1000
+20 17 
+21 18 /*Variables for getopt*/
+22 19 extern char *optarg;//stores input file name
+23 20 extern int optind;//
+24 21 extern int optopt;
+25 22 
+26 23 /*Global Variables*/
+27 24 int c;
+28 25 int nFlag = 0;
+29 26 int encryptState = 0;
+30 27 int err = 0;
+31 28 char *encryptInfo=NULL;
+32 29 int encryptArray[26][2];
+33 30 int lineNum = 1;
+34 31 
+35 32 /*Sub Functions*/
+36 33 int getopt(int argc, char *const argv[], const char *optstring);
+37 34 void printHelp();
+38 35 void printVersion();
+39 36 void printFile(char *fileName,int printToStdOut,int nFlag,
+40 37                         int encryptState,char *encryptFile);
+41 38 void encrypt(const char *encryptFile, int encryptState);
+42 39 
+43 40 //main
+44 41 int main(int argc, char *argv[])
+45 42 {
+46 43         while ((c=getopt(argc,argv,"ntM:m:")) != -1)
+47 44         switch(c){
+48 45             case 'n':
+49 46                 nFlag += 1;
+50 47                 break;
+51 48             case 'm':
+52 49                 if (encryptState == -1)
+53 50                     encryptState = 0;
+54 51                 else
+55 52                     encryptState = 1;
+56 53                 encryptInfo = optarg;
+57 54                 break;
+58 55             case 'M':
+59 56                 if (encryptState == 1)
+60 57                     encryptState = 0;
+61 58                 else
+62 59                     encryptState = -1;
+63 60                 encryptInfo = optarg;
+64 61                 break;
+65 62             case '?':
+66 63                 err = 1;
+67 64                 break;
+68 65             default:
+69 66                 break;
+70 67         }
+71 68 
+72 69     //check if input is --help 
+73 70         if (argc == 2){
+74 71             int wordLength = strlen(argv[1]);
+75 72             char inputWord[wordLength + 1];
+76 73             inputWord[0]='\0';
+77 74             strcat(inputWord,argv[1]); //inputWord now ends with '\0'
+78 75                 if (strcmp(inputWord,"--help") == 0){
+79 76                     printVersion();
+80 77                     fprintf(stdout,"----------------------\n");
+81 78                     printHelp();
+82 79                     exit(0);
+83 80                 }        
+84 81         }    
+85 82 
+86 83         if(err){
+87 84             fprintf(stderr,"Error, invalid input.\n");
+88 85             printHelp();
+89 86             exit(1);
+90 87         }
+91 88         /*if there is no input file*/
+92 89         else if(optind + 1 > argc){
+93 90 
+94 91             char *fileName = NULL; /*no file to input from*/
+95 92             int printFromFile = 0; /*take input from stdin*/
+96 93             printFile(fileName,printFromFile,nFlag,encryptState,encryptInfo);
+97 94 
+98 95         }
+99 96         else{ /*if there is at least an input file*/
+100 97             for (int i = optind; i < argc; i++){ 
+101 98                 
+102 99                 int printFromFile = 1; /*input text from fileName*/
+103 100 
+104 101                 /*convert input file names to C style strings*/
+105 102                 int wordLength = strlen(argv[i]);
+106 103                 char fileName[wordLength + 1];
+107 104                 fileName[0]='\0';
+108 105                 strcat(fileName,argv[i]);
+109 106                  
+110 107                 if(strcmp(fileName,"-") == 0){
+111 108                      printFile(NULL,0,nFlag,encryptState,encryptInfo);/*print to stdout*/
+112 109                      exit(0);
+113 110                 }
+114 111 
+115 112                 printFile(fileName, printFromFile, nFlag,encryptState, encryptInfo);
+116 113             }
+117 114             printf("done\n");
+118 115         }
+119 116             
+120 117             
+121 118 return 0;
+122 119 }
+123 120 
+124 121 void printHelp()
+125 122 {
+126 123     printf("Command: dog\n");
+127 124     printf("Usage: dog [-n] [-m filename] [-M filename] [filename]\n");
+128 125     printf("switch: --version for version info\n");
+129 126     printf("switch: --help for this option\n");
+130 127 }
+131 128 
+132 129 void printVersion()
+133 130 {
+134 131     printf("Version: 0.1\n");
+135 132     printf("Author: Pratap Luitel\n");
+136 133     printf("CS50, Dartmouth College\n");
+137 134 }
+138 135 
+139 136 /**
+140 137  * This function prints output to stdout. 
+141 138  * The input text is either from stdin or from given file/s. 
+142 139  * Other arguments reflect various switches of the dog command. 
+143 140  * 
+144 141  *fileName: ptr of input file, null if stdin
+145 142  *printFromFile: int, 1 if printing from a given file, else 0
+146 143  *nFlag: int, 1 if numberline is to be printed, else 0
+147 144  *encryptState: int, -1 for decrypt, 1 for encrypt, 0 for neither or both
+148 145  *encryptInfo: *char to the file containing encrypt/decrypt info
+149 146  * */
+150 147 void printFile(char *fileName, int printFromFile,int nFlag, 
+151 148         int encryptState,char * encryptInfo){
+152 149     
+153 150     
+154 151     FILE *fp = fopen(fileName,"r");
+155 152     if (fp == NULL){
+156 153         if (!printFromFile)
+157 154             fp = stdin;
+158 155         else{
+159 156             fprintf(stdout,"Input File does not exist.\n");
+160 157             exit(1);
+161 158         }
+162 159     }
+163 160     
+164 161     //if encrypt/decrypt flag is on 
+165 162     if (encryptState == 1 || encryptState == -1){
+166 163         encrypt(encryptInfo,encryptState);
+167 164         printf("In printfile. Encryptstate is: %d \n",encryptState);
+168 165         //check if enc or dec info is valid
+169 166         
+170 167     }
+171 168     
+172 169     int ch;/* stores int from fgetc*/
+173 170     int offset = 0; /*the difference in ascii value*/
+174 171     int newLine = 1; /*flag for new line*/
+175 172     
+176 173     while((ch = fgetc(fp)) != EOF){
+177 174         /*if encrypt or decrypt flag is on*/
+178 175         if(encryptState == 1 || encryptState == -1){ 
+179 176             /*if ascii of character is in a-z*/
+180 177             if (ch > 96 && ch < 123){
+181 178                 /*+ve offset for encrypt, -ve for decrypt, 0 else*/
+182 179                 offset  =  encryptState * encryptArray[ch-97][1];
+183 180             }
+184 181             else
+185 182                 offset = 0;
+186 183         }
+187 184 
+188 185         //if number flag is on and its a new line
+189 186         if (nFlag && newLine){
+190 187             fprintf(stdout,"%d %c",lineNum,ch + offset);
+191 188             lineNum++; 
+192 189         }
+193 190         else{
+194 191             fprintf(stdout,"%c",ch + offset);
+195 192         }
+196 193         //update newline
+197 194         if (ch == 10)
+198 195             newLine = 1;
+199 196         else
+200 197             newLine = 0; 
+201 198     }
+202 199     fclose(fp);
+203 200 
+204 201 }
+205 202 
+206 203 void encrypt(const char *encryptFile, int encryptState){
+207 204     printf("-------Encryption Happeninng-------\n");
+208 205 
+209 206     FILE *ep = fopen(encryptFile,"r");
+210 207     //check if the file exists
+211 208     if(ep == NULL){
+212 209         fprintf(stdout,"Encryption file does not exist\n");
+213 210         exit(1);
+214 211     }
+215 212                   
+216 213     //store encryptions in an array
+217 214     char singleLine[1000];
+218 215     FILE *tempEncryptFile = fopen("encryptionBuffer.txt","w+");
+219 216     //FILE *tempDecryptFile = fopen("decryptionBuffer.txt"."w+");
+220 217     int index = 0;
+221 218     while (fgets(singleLine,1000,ep)){
+222 219         
+223 220         //TO DOs: check if the encryption/decryption file is valid
+224 221         //1.check if the origin chars are within ascii 97-123
+225 222         //2.check if the encrypted chars are within ascii 97-23
+226 223         //3.check if there are 26 different chars
+227 224         //4.check if each line in encInfo file has 3 chars: origin char ,space,dest char
+228 225         
+229 226         /*encryption*/    
+230 227         int sourceChar = (int)singleLine[0];
+231 228         if (encryptState == -1)/*decryption*/
+232 229             sourceChar = (int)singleLine[2];
+233 230         int destChar = (int)singleLine[2] - (int)singleLine[0];
+234 231         
+235 232         /*update the encryption/decryption array*/
+236 233         encryptArray[sourceChar-97][0] = sourceChar;
+237 234         encryptArray[sourceChar-97][1] = destChar;
+238 235         
+239 236         fprintf(tempEncryptFile,"%d %d\n",encryptArray[index-1][0],encryptArray[index-1][1]);
+240 237         index++;   
+241 238     }
+242 239    
+243 240     printf("finished encrypting arrays...\n");
+244 241     fclose(ep),fclose(tempEncryptFile);
+245 242 }
+246 243 
+247 244 
+248 245 /*
+249 246 void printInput(int nFlag,int encryptFlag,const char *encryptFile,
+250 247         int decryptFlag,const char *decryptFile)
+251 248 {
+252 249     int lineNum = 1;
+253 250     int ch;
+254 251     int offset = 0;
+255 252     int newLine = 1; 
+256 253     //if encrypt flag is on 
+257 254     if (encryptFlag)
+258 255         encrypt(encryptFile);
+259 256      
+260 257     while((ch = fgetc(stdin)) != EOF){
+261 258         //if encryption flag is on and the character being read 
+262 259         //is between a to z(ascii 97 and 122),find the offset stored in encryptArray
+263 260         if(encryptFlag && ch < 96 && ch > 123)
+264 261             offset  =  encryptArray[ch-97][1];//first index of offset starts from 97 for a
+265 262         else
+266 263             offset = 0;
+267 264 
+268 265         //if number flag is on and its a new line
+269 266         if (nFlag && newLine){
+270 267             fprintf(stdout,"%d %c",lineNum,ch + offset);
+271 268             lineNum++; 
+272 269         }
+273 270         else{
+274 271             fprintf(stdout,"%c",ch + offset);
+275 272         }
+276 273         //update newline
+277 274         if (ch == 10)
+278 275             newLine = 1;
+279 276         else
+280 277             newLine = 0; 
+281 278     }
+282 279 }
+283 280 */
+284 cnmd
+done
