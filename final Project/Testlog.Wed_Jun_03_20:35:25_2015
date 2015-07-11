@@ -1,0 +1,197 @@
+Author: Team Cabernet
+Date: 6/1/2015
+Filname: Wed_Jun_03_20:35:25_2015
+This is a log file of the results of various test cases
+
+***********************************************************
+
+*****Cleaning*****
+rm -f *~
+rm -f *.o
+rm -f *#
+rm -f AMStartup
+rm -f core*
+Status: Clean Successful
+
+***********************************************************
+
+*****Building*****
+gcc -Wall -pedantic -std=c11 -g -ggdb -c ./src/AMStartup.c ./src/avatar.c -pthread `pkg-config --cflags --libs gtk+-3.0` 
+gcc -Wall -pedantic -std=c11 -g -ggdb -o AMStartup AMStartup.o avatar.o -pthread `pkg-config --cflags --libs gtk+-3.0` 
+Status: Build Successful
+
+***********************************************************
+
+*****Argument Testing*****
+
+Input: ./AMStartup -n 2 -d 5
+Output,
+You must enter all 3 switches, -n, -d ,-h Status: Argument Test Successful
+
+Input: ./AMStartup -n 2 -d 5 -d 10 -h stowe.cs.dartmouth.edu
+Output,
+You must enter all 3 switches, -n, -d ,-h Status: Argument Test Successful
+
+***********************************************************
+
+*****nAvatar*****
+
+Input: ./AMStartup -n 20 -d 5 -h stowe.cs.dartmouth.edu
+Output,
+error: number of avatars must be between 2 and 10
+Status: nAvatar Test Successful
+
+Input: ./AMStartup -n -20 -d 5 -h stowe.cs.dartmouth.edu
+Output,
+error: number of avatars must be between 2 and 10
+Status: nAvatar Test Successful
+
+Input: ./AMStartup -n ab -d 5 -h stowe.cs.dartmouth.edu
+Output,
+error: number of avatars must be between 2 and 10
+Status: nAvatar Test Successful
+
+***********************************************************
+
+*****difficulty*****
+
+Input: ./AMStartup -n 5 -d 500 -h stowe.cs.dartmouth.edu
+Output,
+error: difficulty must be between 0 and 9
+Status: difficulty Test Successful
+
+Input: ./AMStartup -n 5 -d -50 -h stowe.cs.dartmouth.edu
+Output,
+error: difficulty must be between 0 and 9
+Status: difficulty Test Successful
+
+Input: ./AMStartup -n 5 -d abc -h stowe.cs.dartmouth.edu
+Output,
+
+error: difficulty must be between 0 and 9
+Status: difficulty Test Successful
+
+***********************************************************
+
+*****Valid Case Testing*****
+
+#####################################
+Input: ./AMStartup -n 2 -d 0 -h stowe.cs.dartmouth.edu
+Output,
+
+number of avatars is: 2
+maze difficulty is: 0
+host server name is: stowe.cs.dartmouth.edu
+USER is: pluitel
+maze height is: 5
+maze width is: 5
+maze port is: 33507
+Avatar 0 ready to move!
+Avatar 1 ready to move!
+avatar 0 solved the maze!
+avatar 1 solved the maze!
+
+done solving maze, freeing memory and closing logfile
+logfile succesfully closed!
+
+#####################################
+
+#####################################
+Input: ./AMStartup -n 3 -d 3 -h stowe.cs.dartmouth.edu
+Output,
+
+number of avatars is: 3
+maze difficulty is: 3
+host server name is: stowe.cs.dartmouth.edu
+USER is: pluitel
+maze height is: 20
+maze width is: 20
+maze port is: 36206
+Avatar 0 ready to move!
+Avatar 1 ready to move!
+Avatar 2 ready to move!
+avatar 1 solved the maze!
+avatar 0 solved the maze!
+avatar 2 solved the maze!
+
+done solving maze, freeing memory and closing logfile
+logfile succesfully closed!
+
+#####################################
+
+#####################################
+Input: ./AMStartup -n 6 -d 6 -h stowe.cs.dartmouth.edu
+Output,
+
+number of avatars is: 6
+maze difficulty is: 6
+host server name is: stowe.cs.dartmouth.edu
+USER is: pluitel
+maze height is: 35
+maze width is: 35
+maze port is: 41867
+Avatar 0 ready to move!
+Avatar 1 ready to move!
+Avatar 2 ready to move!
+Avatar 3 ready to move!
+Avatar 4 ready to move!
+Avatar 5 ready to move!
+avatar 2 solved the maze!
+avatar 4 solved the maze!
+avatar 3 solved the maze!
+avatar 1 solved the maze!
+avatar 0 solved the maze!
+avatar 5 solved the maze!
+
+done solving maze, freeing memory and closing logfile
+logfile succesfully closed!
+
+#####################################
+
+#####################################
+Input: ./AMStartup -n 10 -d 9 -h stowe.cs.dartmouth.edu
+Output,
+
+number of avatars is: 10
+maze difficulty is: 9
+host server name is: stowe.cs.dartmouth.edu
+USER is: pluitel
+maze height is: 100
+maze width is: 100
+maze port is: 54941
+Avatar 0 ready to move!
+Avatar 1 ready to move!
+Avatar 2 ready to move!
+Avatar 3 ready to move!
+Avatar 4 ready to move!
+Avatar 5 ready to move!
+Avatar 6 ready to move!
+Avatar 7 ready to move!
+Avatar 9 ready to move!
+Avatar 8 ready to move!
+avatar 8 solved the maze!
+avatar 1 solved the maze!
+avatar 3 solved the maze!
+avatar 5 solved the maze!
+avatar 9 solved the maze!
+avatar 0 solved the maze!
+avatar 4 solved the maze!
+avatar 2 solved the maze!
+avatar 7 solved the maze!
+avatar 6 solved the maze!
+
+done solving maze, freeing memory and closing logfile
+logfile succesfully closed!
+Status: Valid Test Successful
+
+#####################################
+rm -f *~
+rm -f *.o
+rm -f *#
+rm -f AMStartup
+rm -f core*
+*****Completing Testing*****
+
+Testing Complete Successfully.
+Time: Wed_Jun_03_21:08:58_2015
+
